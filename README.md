@@ -56,7 +56,7 @@ This repository contains the Julia code used to produce the numerical results in
 
 Solves the augmented supra-Lagrangian saddle-point problem. The second-order ODE system implemented is:
 
-$$\dot{y} = v, \qquad \dot{v} = -(\mathcal{L} + \mathbb{I})\,v - \mathcal{L}^2\,y$$
+$$\dot{y} = v, \qquad \dot{v} = -(\mathcal{L} + \mathbb{I}) v - \mathcal{L}^2 y$$
 
 where $\mathcal{L}$ is the supra-Laplacian matrix of the multiplex network. Integration uses a fixed-step **RK4** solver with a discrete termination callback triggered when $\sum_{i < j}|y_i - y_j| \leq 10^{-2}$.
 
@@ -64,7 +64,7 @@ where $\mathcal{L}$ is the supra-Laplacian matrix of the multiplex network. Inte
 
 A soft-penalty-based variant with a time-decaying gain $\varsigma(t) = \frac{1}{t + \theta}$ (default $\theta = 10000$):
 
-$$\dot{y} = -(\mathcal{L} + \varsigma(t)\,\mathbb{I})\,y - \varsigma(t)\,\nabla\tilde{f}(y)$$
+$$\dot{y} = -(\mathcal{L} + \varsigma(t) \mathbb{I}) y - \varsigma(t) \nabla\tilde{f}(y)$$
 
 Convergence is terminated when $\sum_{i < j}|y_i - y_j| \leq 10^{-3}$.
 
@@ -72,11 +72,9 @@ Convergence is terminated when $\sum_{i < j}|y_i - y_j| \leq 10^{-3}$.
 
 Three-layer multiplex network (fully connected / mixed / ring topologies) modeling a multi-energy system. The RHS includes the power and gas balance constraints:
 
-$$\dot{y} = v, \qquad \dot{v} = -(\mathcal{L} + \mathbb{I})\,v - \mathcal{L}^2\,q - \alpha(\mathbf{q})\,\tilde{\mathbf{1}}$$
+$$\dot{y} = v, \qquad \dot{v} = -(\mathcal{L} + \mathbb{I}) v - \mathcal{L}^2 q - \alpha(\mathbf{q}) \tilde{\mathbf{1}}$$
 
 where $\alpha(\mathbf{q})$ encodes the active power and inelastic gas demand residuals via the fuel conversion factor $\phi = 0.7$. Integration uses **AutoTsit5(Rosenbrock23())**, an adaptive stiff/non-stiff solver.
-
----
 
 ---
 
